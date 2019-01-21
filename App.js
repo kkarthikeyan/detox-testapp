@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, ScrollView, View, Button, Alert} from 'react-native';
 import ProfileForm from './ProfileForm';
 
 const instructions = Platform.select({
@@ -19,18 +19,28 @@ const instructions = Platform.select({
 
 export default class App extends React.Component {
   render() {
+    textList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(key => (
+      <Text style={{marginTop: 50}}>Line {key}</Text>
+    ));
     return (
-      <View style={styles.container}>
-	      <ProfileForm text='Hi' />
-      </View>
+      <ScrollView style={styles.container} testID='scrollView'>
+	      <ProfileForm />
+        {textList}
+        <Button
+          onPress={() => {
+            Alert.alert('overflow button');
+          }}
+          title="Overflow"
+        />
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: 'center',
+    flex: 1
+    // alignItems: 'flex-start',
     // backgroundColor: '#F5FCFF',
   },
   welcome: {
