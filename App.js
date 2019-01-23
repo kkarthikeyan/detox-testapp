@@ -14,13 +14,13 @@ const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
     'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    'Press Cmd+M button for dev menu',
 });
 
 export default class App extends React.Component {
   render() {
     textList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(key => (
-      <Text style={{marginTop: 50}}>Line {key}</Text>
+      <Text style={{marginTop: 50}} key={key}>List item {key}</Text>
     ));
     return (
       <ScrollView style={styles.container} testID='scrollView'>

@@ -30,9 +30,10 @@ export default class Blink extends Component {
       
       <Button
         onPress={() => {
-          Alert.alert(`Hello ${this.state.firstName} ${this.state.lastName}!`);
+          Alert.alert('Welcome', `Hello ${this.state.firstName} ${this.state.lastName}!`);
         }}
         title="Submit"
+        testID="submitButton"
       />
     </View>
     );
