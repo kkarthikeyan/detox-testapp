@@ -5,7 +5,7 @@ Echo() {
   echo "### [$TS] $@"
 }
 
-Echo "Starting test"
+Echo "Starting execution"
 
 Echo "Current folder: `pwd`"
 Echo "Current folder files [Before Run]:"
@@ -23,15 +23,16 @@ fi
 echo "UDID is ${UDID}"
 
 ### install applesimutils
-Echo "Starting install of applesimutils"
-brew tap wix/brew
-brew install applesimutils
-Echo "Completed install of applesimutils"
+#Echo "Starting install of applesimutils"
+#brew tap wix/brew
+#brew install applesimutils
+#Echo "Completed install of applesimutils"
 
 ### version checks
 Echo "node version: `node --version`"
 Echo "npm  version: `npm -version`"
 Echo "watchman version: `watchman --version`"
+Echo "xcpretty version: `xcpretty --version`"
 
 ### install npm packages
 Echo "Starting npm install"
@@ -39,11 +40,16 @@ npm install
 Echo "Completed npm install"
 
 ### add local npm bin to path
-export PATH=$PATH:$PWDi/node_modules/.bin/
+export PATH=$PATH:$PWD/node_modules/.bin
+
+### start detox build
+Echo "Starting detox build"
+detox build -c ios.sim.debug
+Echo "Completed detox build"
 
 ### start detox test
 Echo "Starting detox test"
-detox test --configuration ios.sim.debug --loglevel verbose > detox.log 2>&1
+detox test -c ios.sim.debug --loglevel verbose > detox.log 2>&1
 scriptExitStatus=$?
 Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 
