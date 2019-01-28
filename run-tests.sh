@@ -44,12 +44,13 @@ export PATH=$PATH:$PWD/node_modules/.bin
 
 ### start detox build
 Echo "Starting detox build"
-detox build -c ios.sim.debug
+#detox build -c ios.sim.debug
+react-native run-ios
 Echo "Completed detox build"
 
 ### start detox test
 Echo "Starting detox test"
-detox test -c ios.sim.debug --loglevel verbose > detox.log 2>&1
+detox test -c ios.sim.debug --loglevel verbose --record-videos all  > detox.log 2>&1
 scriptExitStatus=$?
 Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 
