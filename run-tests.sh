@@ -36,7 +36,7 @@ Echo "xcpretty version: `xcpretty --version`"
 
 ### install npm packages
 Echo "Starting npm install"
-yarn install
+npm install
 Echo "Completed npm install"
 
 ### add local npm bin to path
@@ -51,7 +51,7 @@ export PATH=$PATH:$PWD/node_modules/.bin
 ### start detox test
 Echo "Starting detox build test"
 #detox test -c ios.sim.debug --loglevel verbose --record-videos all  > detox.log 2>&1
-yarn detox:ios > detox.log 2>&1
+npm run detox:ios > detox.log 2>&1
 scriptExitStatus=$?
 Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 

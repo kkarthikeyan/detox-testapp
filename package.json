@@ -9,7 +9,7 @@
     "adbreverse": "adb reverse tcp:8097 tcp:8097",
     "detox:ios:build:debug": "detox build -c ios.sim.debug",
     "detox:ios:test:debug": "detox test -c ios.sim.debug --record-videos all --take-screenshots all --loglevel verbose",
-    "detox:ios": "yarn detox:ios:build:debug && yarn detox:ios:test:debug"
+    "detox:ios": "npm run detox:ios:build:debug && npm run detox:ios:test:debug"
   },
   "dependencies": {
     "react": "16.6.3",
