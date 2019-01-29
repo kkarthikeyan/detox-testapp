@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-android",
+    "adbreverse": "adb reverse tcp:8097 tcp:8097",
+    "detox:ios:build:debug": "detox build -c ios.sim.debug",
+    "detox:ios:test:debug": "detox test -c ios.sim.debug --record-videos all --take-screenshots all --loglevel verbose",
+    "detox:ios": "yarn detox:ios:build:debug && yarn detox:ios:test:debug"
   },
   "dependencies": {
     "react": "16.6.3",
@@ -31,13 +36,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/TestApp.app",
-        "build": "xcodebuild -UseNewBuildSystem=NO -project ios/TestApp.xcodeproj -scheme TestApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "name": "iPhone X"
-      },
-      "ios.detox.debug": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/TestApp.app",
-        "build": "xcodebuild -UseNewBuildSystem=NO -project ios/TestApp.xcodeproj -scheme TestApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "build": "set -o pipefail && xcodebuild -UseNewBuildSystem=NO -project ios/TestApp.xcodeproj -scheme TestApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | xcpretty",
         "type": "ios.simulator",
         "name": "iPhone X"
       },

@@ -14,7 +14,6 @@ ls -ltra
 ### cleanup screenshots folder
 export SCREENSHOTSFOLDER=$PWD/screenshots
 rm -rf "$SCREENSHOTSFOLDER"
-mkdir -p "$SCREENSHOTSFOLDER"
 
 ### device udid
 if [ -z ${UDID} ] ; then
@@ -31,26 +30,28 @@ echo "UDID is ${UDID}"
 ### version checks
 Echo "node version: `node --version`"
 Echo "npm  version: `npm -version`"
-Echo "watchman version: `watchman --version`"
+#Echo "watchman version: `watchman --version`"
+Echo "yarn version: `yarn -v`"
 Echo "xcpretty version: `xcpretty --version`"
 
 ### install npm packages
 Echo "Starting npm install"
-npm install
+yarn install
 Echo "Completed npm install"
 
 ### add local npm bin to path
 export PATH=$PATH:$PWD/node_modules/.bin
 
 ### start detox build
-Echo "Starting detox build"
+#Echo "Starting detox build"
 #detox build -c ios.sim.debug
-react-native run-ios
-Echo "Completed detox build"
+#react-native run-ios
+#Echo "Completed detox build"
 
 ### start detox test
-Echo "Starting detox test"
-detox test -c ios.sim.debug --loglevel verbose --record-videos all  > detox.log 2>&1
+Echo "Starting detox build test"
+#detox test -c ios.sim.debug --loglevel verbose --record-videos all  > detox.log 2>&1
+yarn detox:ios > detox.log 2>&1
 scriptExitStatus=$?
 Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 
@@ -65,5 +66,6 @@ Echo "detox-server-log"
 cat detox-server.log
 
 mv ./*.xml TEST-all.xml
+mv artifacts $SCREENSHOTSFOLDER
 
 exit $scriptExitStatus
