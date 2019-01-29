@@ -8,8 +8,6 @@ Echo() {
 Echo "Starting execution"
 
 Echo "Current folder: `pwd`"
-Echo "Current folder files [Before Run]:"
-ls -ltra
 
 ### cleanup screenshots folder
 export SCREENSHOTSFOLDER=$PWD/screenshots
@@ -43,15 +41,17 @@ Echo "Completed npm install"
 export PATH=$PATH:$PWD/node_modules/.bin
 
 ### start detox build
-#Echo "Starting detox build"
+Echo "Starting detox build"
 #detox build -c ios.sim.debug
 #react-native run-ios
-#Echo "Completed detox build"
+npm run detox:ios:build:debug 2>&1 | tee detox-build.log
+Echo "Completed detox build"
 
 ### start detox test
 Echo "Starting detox build test"
 #detox test -c ios.sim.debug --loglevel verbose --record-videos all  > detox.log 2>&1
-npm run detox:ios > detox.log 2>&1
+#npm run detox:ios > detox.log 2>&1
+npm run detox:ios:test:debug -- -a $SCREENSHOTSFOLDER 2>&1 | tee detox.log
 scriptExitStatus=$?
 Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 
@@ -66,6 +66,6 @@ Echo "detox-server-log"
 cat detox-server.log
 
 mv ./*.xml TEST-all.xml
-mv artifacts $SCREENSHOTSFOLDER
+#mv artifacts $SCREENSHOTSFOLDER
 
 exit $scriptExitStatus

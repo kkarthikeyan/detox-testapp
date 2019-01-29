@@ -11,11 +11,13 @@ describe('Example', () => {
       : by.text('Welcome');
   });
 
-  it('should show welcome label', async () => {
-    await expect(element(by.id('welcome'))).toBeVisible();
-  });
+  //it('should show welcome label', async () => {
+  //  await expect(element(by.id('welcome'))).toBeVisible();
+  //});
 
   it('should greet on clicking submit', async () => {
+    await expect(element(by.id('welcome'))).toBeVisible();
+
     await element(by.id('firstName')).replaceText('Karthik');
     await element(by.id('lastName')).replaceText('Kailasam');
     await element(by.id('submitButton')).tap();
