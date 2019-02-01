@@ -59,6 +59,9 @@ Echo "Completed detox test, exit status: '${scriptExitStatus}'"
 Echo "Current folder [`pwd`] contents [Post Run]"
 ls -ltra
 
+Echo "detox-build-log"
+cat detox-build.log
+
 Echo "detox-test-log"
 cat detox.log
 
